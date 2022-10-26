@@ -10,10 +10,10 @@ public interface CadastroInterface {
     
     public List<Cadastro> listar();
 
-    public void removerCadastro(int nr_cpf);
+    public void removerCadastro(int id_conta);
 
     public void atualizar(Cadastro cadastro);
     
-    public Cadastro busCadastro(int nr_cpf);
+    public Cadastro busCadastro(int id_conta);
     
 }

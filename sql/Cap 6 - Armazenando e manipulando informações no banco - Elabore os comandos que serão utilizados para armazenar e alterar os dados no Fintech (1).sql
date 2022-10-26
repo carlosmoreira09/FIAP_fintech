@@ -1,4 +1,5 @@
 CREATE TABLE `T_FIN_USER` (
+  `id_conta` varchar(11) NOT NULL
   `nr_cpf` varchar(11) NOT NULL,
   `nm_email` varchar(100) NOT NULL,
   `nm_nome` varchar(100) NOT NULL,

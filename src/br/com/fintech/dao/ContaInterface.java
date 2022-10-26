@@ -10,10 +10,10 @@ public interface ContaInterface {
     
     public List<Conta> listar();
 
-    public void removerConta(int nr_cpf);
+    public void removerConta(int id_conta);
 
     public void atualizarConta(Conta conta);
     
-    public Conta busConta(int nr_cpf);
+    public Conta busConta(int id_conta);
     
 }
