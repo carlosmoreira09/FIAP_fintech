@@ -3,11 +3,11 @@ package br.com.fintech.bean;
 public class Conta {
 
     private int id_conta;
-    private int nr_cpf;
+    private String nr_cpf;
     private int nr_agencia;
     private int nr_conta;
     
-    public Conta(int id_conta, int nr_cpf, int nr_agencia, int nr_conta) {
+    public Conta(int id_conta, String nr_cpf, int nr_agencia, int nr_conta) {
         
         super();
         this.id_conta = id_conta;
@@ -24,11 +24,11 @@ public class Conta {
         return id_conta;
     }
 
-    public int getNr_cpf() { 
+    public String getNr_cpf() {
         return nr_cpf;
     }
 
-    public void setNr_cpf(int nr_cpf) { 
+    public void setNr_cpf(String nr_cpf) {
         this.nr_cpf = nr_cpf;
     }
 

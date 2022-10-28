@@ -8,7 +8,7 @@ public class TesteUpdate {
 
 		CadastroDao dao = new CadastroDao();
 
-		Cadastro cadastro = dao.busCadastro("00100200310");
+		Cadastro cadastro = dao.busCadastro("00100200210");
 
 		System.out.println("Nome: " + cadastro.getNm_nome() +
                             "\nEmail: "	+ cadastro.getNm_email() + 

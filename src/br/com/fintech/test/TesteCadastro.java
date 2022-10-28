@@ -13,7 +13,7 @@ public class TesteCadastro {
 			Cadastro cadastro = new Cadastro();
 			cadastro.setNm_nome("Jorge Luis Jesus");
 			cadastro.setNm_email("jorgeluiz@devsolutions.com");
-			cadastro.setNr_cpf("00100200310");
+			cadastro.setNr_cpf("00100200210");
 
 			dao.insert(cadastro);
 

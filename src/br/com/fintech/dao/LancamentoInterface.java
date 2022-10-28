@@ -5,9 +5,9 @@ import br.com.fintech.bean.Lancamento;
 
 public interface LancamentoInterface {
 
-    public void cadastrarLancamento(Lancamento lancamento);
+    public void insert(Lancamento lancamento);
     
-    public List<Lancamento> listar();
+    public List<Lancamento> getAll();
 
     public void removerLancamento(int id_lancamento);
 

@@ -43,7 +43,7 @@ public class CadastroDao implements CadastroInterface {
     }
 
     @Override
-    public List<Cadastro> listar() {
+    public List<Cadastro> getAll() {
         
         List<Cadastro> lista = new ArrayList<Cadastro>();
         PreparedStatement stmt = null;
@@ -82,7 +82,7 @@ public class CadastroDao implements CadastroInterface {
     @Override
     public void atualizar(Cadastro cadastro) {
         PreparedStatement stmt = null;
-        try { 
+        try {
             conexao = FintechDB.obterconexao();
             String sql = "UPDATE T_FIN_USER SET NM_EMAIL = ?, NM_NOME = ? WHERE nr_cpf = ?";
 
@@ -108,7 +108,7 @@ public class CadastroDao implements CadastroInterface {
     }
 
     @Override
-    public void removerCadastro(String nr_cpf) {
+    public void removerCadastro(Cadastro cadastro) {
        
         PreparedStatement stmt = null;
         try { 
@@ -116,7 +116,7 @@ public class CadastroDao implements CadastroInterface {
 
             String sql = "DELETE FROM T_FIN_USER WHERE nr_cpf = ?";
 			stmt = conexao.prepareStatement(sql);
-			stmt.setString(1, nr_cpf);
+			stmt.setString(1, cadastro.getNr_cpf());
 			stmt.executeUpdate();
 
         } catch (SQLException e) {
@@ -161,6 +161,4 @@ public class CadastroDao implements CadastroInterface {
         }
         return new Cadastro(nr_cpf, nm_nome, nm_email);
     }
-
- 
 }

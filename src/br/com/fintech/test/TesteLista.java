@@ -11,7 +11,7 @@ public class TesteLista {
 
 		CadastroDao dao = new CadastroDao();
 
-		List<Cadastro> lista = dao.listar();
+		List<Cadastro> lista = dao.getAll();
 		for (Cadastro item : lista) {
 
 			System.out.println(

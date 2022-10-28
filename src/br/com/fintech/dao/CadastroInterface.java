@@ -8,9 +8,9 @@ public interface CadastroInterface {
     
     public void insert(Cadastro cadastro);
     
-    public List<Cadastro> listar();
+    public List<Cadastro> getAll();
 
-    public void removerCadastro(String nr_cpf);
+    public void removerCadastro(Cadastro cadastro);
 
     public void atualizar(Cadastro cadastro);
     
