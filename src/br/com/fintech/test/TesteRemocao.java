@@ -11,7 +11,7 @@ public class TesteRemocao {
 
 		while (i < 5){
 
-			dao.removerCadastro(y);
+			dao.removerCadastro("");
 			System.out.println("Removido Cadastro:" + y);
             i++;
             y++;

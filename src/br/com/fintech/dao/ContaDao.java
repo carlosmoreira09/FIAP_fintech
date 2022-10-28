@@ -43,14 +43,14 @@ public class ContaDao implements ContaInterface {
 		}		
 
 	@Override
-	public List<Conta> listar() {
+	public List<Conta> listar(String cpf) {
 		
 		List<Conta> lista = new ArrayList<Conta>();
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
 		try {
 			conexao = FintechDB.obterconexao();
-			stmt = conexao.prepareStatement("SELECT * FROM T_FIN_CONTA");
+			stmt = conexao.prepareStatement("SELECT * FROM T_FIN_CONTA WHERE nr_cpf = ?");
 			rs = stmt.executeQuery();
 
 			while (rs.next()) {
@@ -140,7 +140,7 @@ public class ContaDao implements ContaInterface {
 
 		try {
 			conexao = FintechDB.obterconexao();
-			stmt = conexao.prepareStatement("SELECT * FROM T_FIN_AGENCIA WHERE nr_cpf = ?");
+			stmt = conexao.prepareStatement("SELECT * FROM T_FIN_CONTA WHERE nr_cpf = ?");
 			stmt.setInt(1, nr_cpf);
 			rs = stmt.executeQuery();
 

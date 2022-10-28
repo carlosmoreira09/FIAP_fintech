@@ -11,8 +11,9 @@ public class TesteConta {
     public static void main(String[] args) {
 
 		ContaDao dao = new ContaDao();
+		String nr_cpf = "";
 
-		List<Conta> lista = dao.listar();
+		List<Conta> lista = dao.listar(nr_cpf);
 		for (Conta agencia : lista) {
 			System.out.println(
 								"Conta Numero:" + agencia.getNr_conta() + 

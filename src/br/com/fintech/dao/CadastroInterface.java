@@ -6,14 +6,14 @@ import br.com.fintech.bean.Cadastro;
 
 public interface CadastroInterface {
     
-    public void cadastrar(Cadastro cadastro);
+    public void insert(Cadastro cadastro);
     
     public List<Cadastro> listar();
 
-    public void removerCadastro(int id_conta);
+    public void removerCadastro(String nr_cpf);
 
     public void atualizar(Cadastro cadastro);
     
-    public Cadastro busCadastro(int id_conta);
+    public Cadastro busCadastro(String nr_cpf);
     
 }

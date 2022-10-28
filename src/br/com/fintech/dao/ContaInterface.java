@@ -8,7 +8,7 @@ public interface ContaInterface {
     
     public void cadastrarConta(Conta conta);
     
-    public List<Conta> listar();
+    public List<Conta> listar(String nr_cpf);
 
     public void removerConta(int id_conta);
 

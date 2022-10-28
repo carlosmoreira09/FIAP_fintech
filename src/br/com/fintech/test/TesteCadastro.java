@@ -7,15 +7,15 @@ public class TesteCadastro {
     public static void main(String[] args) {
 
 		CadastroDao dao = new CadastroDao();
-        int y = 1;
+        int y = 4;
 		while (y < 5) {
 
 			Cadastro cadastro = new Cadastro();
 			cadastro.setNm_nome("Jorge Luis Jesus");
 			cadastro.setNm_email("jorgeluiz@devsolutions.com");
-			cadastro.setNr_cpf(00100200310);
+			cadastro.setNr_cpf("00100200310");
 
-			dao.cadastrar(cadastro);
+			dao.insert(cadastro);
 
 			System.out.println("Usuário Cadastrado #" + y);
 			y++;

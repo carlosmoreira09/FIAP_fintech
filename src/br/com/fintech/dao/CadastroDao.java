@@ -15,19 +15,19 @@ public class CadastroDao implements CadastroInterface {
     private Connection conexao;
 
     @Override
-    public void cadastrar(Cadastro cadastro) {
+    public void insert(Cadastro cadastro) {
         
         PreparedStatement stmt = null;
        
         try { 
             conexao = FintechDB.obterconexao();
-            String sql = "INSERT INTO T_FIN_CADASTRO(NR_CPF, NM_EMAIL, NM_NOME) VALUES (?, ?, ?)";
+            String sql = "INSERT INTO T_FIN_USER(NR_CPF, NM_EMAIL, NM_NOME) VALUES (?, ?, ?)";
 
             stmt = conexao.prepareStatement(sql);
-            stmt.setInt(1, cadastro.getNr_cpf());
+            stmt.setString(1, cadastro.getNr_cpf());
             stmt.setString(2, cadastro.getNm_email());
             stmt.setString(3, cadastro.getNm_nome());
-            
+
             stmt.executeUpdate();
 
         } catch(SQLException e) { 
@@ -56,12 +56,11 @@ public class CadastroDao implements CadastroInterface {
 
             while(rs.next()) { 
 
-                int id_conta = rs.getInt("id_conta");
-                int nr_cpf = rs.getInt("nr_cpf");
+                String nr_cpf = rs.getString("nr_cpf");
                 String nm_nome = rs.getString("nm_nome");
                 String nm_email = rs.getString("nm_email");
 
-                Cadastro cadastro = new Cadastro(id_conta, nr_cpf, nm_nome, nm_email);
+                Cadastro cadastro = new Cadastro(nr_cpf, nm_nome, nm_email);
                 lista.add(cadastro);
             }
 
@@ -77,7 +76,7 @@ public class CadastroDao implements CadastroInterface {
 			}
 		}
 
-        return null;
+        return lista;
     }
 
     @Override
@@ -85,15 +84,14 @@ public class CadastroDao implements CadastroInterface {
         PreparedStatement stmt = null;
         try { 
             conexao = FintechDB.obterconexao();
-            String sql = "UPDATE T_FIN_CADASTRO SET NR_CPF = ?, NM_EMAIL = ?, NM_NOME = ? WHERE id_conta = ?";
+            String sql = "UPDATE T_FIN_USER SET NM_EMAIL = ?, NM_NOME = ? WHERE nr_cpf = ?";
 
             stmt = conexao.prepareStatement(sql);
-            
-            stmt.setInt(1, cadastro.getNr_cpf());
-            stmt.setString(2, cadastro.getNm_email());
-            stmt.setString(3, cadastro.getNm_nome());
-            stmt.setInt(4, cadastro.getId_conta());
-            
+
+            stmt.setString(1, cadastro.getNm_email());
+            stmt.setString(2, cadastro.getNm_nome());
+            stmt.setString(3, cadastro.getNr_cpf());
+
             stmt.executeUpdate();
 
         } catch(SQLException e) { 
@@ -110,15 +108,15 @@ public class CadastroDao implements CadastroInterface {
     }
 
     @Override
-    public void removerCadastro(int id_conta) {
+    public void removerCadastro(String nr_cpf) {
        
         PreparedStatement stmt = null;
         try { 
             conexao = FintechDB.obterconexao();
 
-            String sql = "DELETE FROM T_FIN_USER WHERE id_conta = ?";
+            String sql = "DELETE FROM T_FIN_USER WHERE nr_cpf = ?";
 			stmt = conexao.prepareStatement(sql);
-			stmt.setInt(1, id_conta);
+			stmt.setString(1, nr_cpf);
 			stmt.executeUpdate();
 
         } catch (SQLException e) {
@@ -135,9 +133,33 @@ public class CadastroDao implements CadastroInterface {
     }
 
     @Override
-    public Cadastro busCadastro(int id_conta) {
-        // TODO Auto-generated method stub
-        return null;
+    public Cadastro busCadastro(String nr_cpf) {
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        String nm_nome = null;
+        String nm_email = null;
+        try {
+            conexao = FintechDB.obterconexao();
+            stmt = conexao.prepareStatement("SELECT nm_nome, nm_email FROM T_FIN_USER WHERE nr_cpf = ?");
+            stmt.setString(1, nr_cpf);
+            rs = stmt.executeQuery();
+            rs.next();
+
+            nm_nome = rs.getString("nm_nome");
+            nm_email = rs.getString("nm_email");
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                stmt.close();
+                rs.close();
+                conexao.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return new Cadastro(nr_cpf, nm_nome, nm_email);
     }
 
  

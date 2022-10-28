@@ -16,7 +16,6 @@ public class TesteLista {
 
 			System.out.println(
 								"\n---------------------------" +
-								"\nId Conta: " + item.getId_conta() + 
 								"\nNome: " + item.getNm_nome() + 
 								"\nE-mail: " + item.getNm_email() + 
 								"\nCPF: " + item.getNr_cpf() + 
