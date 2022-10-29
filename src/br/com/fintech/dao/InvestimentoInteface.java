@@ -6,9 +6,9 @@ import br.com.fintech.bean.Investimento;
 
 public interface InvestimentoInteface {
 
-    public void cadastrarInvestimento(Investimento investimento);
+    public void insert(Investimento investimento);
     
-    public List<Investimento> listar();
+    public List<Investimento> getAll();
 
     public void removerInvestimento(int id_investimento);
 

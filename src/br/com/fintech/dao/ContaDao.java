@@ -15,7 +15,7 @@ public class ContaDao implements ContaInterface {
 	private Connection conexao;
 	
 	@Override
-		public void cadastrarConta(Conta conta) {
+		public void insert(Conta conta) {
 			
 			PreparedStatement stmt = null;
 	
@@ -23,7 +23,7 @@ public class ContaDao implements ContaInterface {
 				conexao = FintechDB.obterconexao();
 				String sql = "INSERT INTO T_FIN_CONTA(nr_cpf, nr_agencia, nr_conta) VALUES (?, ?, ?)";
 				stmt = conexao.prepareStatement(sql);
-				stmt.setInt(1, conta.getNr_cpf());
+				stmt.setString(1, conta.getNr_cpf());
 				stmt.setInt(2, conta.getNr_agencia());
 				stmt.setInt(3, conta.getNr_conta());
 	
@@ -43,22 +43,24 @@ public class ContaDao implements ContaInterface {
 		}		
 
 	@Override
-	public List<Conta> listar() {
+	public List<Conta> getAll(String cpf) {
 		
-		List<Conta> lista = new ArrayList<Conta>();
+		List<Conta> lista = new ArrayList<>();
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
+
 		try {
 			conexao = FintechDB.obterconexao();
-			stmt = conexao.prepareStatement("SELECT * FROM T_FIN_CONTA");
+			stmt = conexao.prepareStatement("SELECT * FROM T_FIN_CONTA WHERE nr_cpf = ?");
+			stmt.setString(1,cpf);
 			rs = stmt.executeQuery();
 
 			while (rs.next()) {
 
-				int id_conta = rs.getInt("id_conta");
-				int nr_cpf = rs.getInt("nr_cpf");
+				String nr_cpf = rs.getString("nr_cpf");
 				int nr_agencia = rs.getInt("nr_agencia");
 				int nr_conta = rs.getInt("nr_conta");
+				int id_conta = rs.getInt("id_conta");
 
 				Conta conta = new Conta(id_conta, nr_cpf, nr_agencia, nr_conta);
 				lista.add(conta);
@@ -69,6 +71,7 @@ public class ContaDao implements ContaInterface {
 			try {
 				stmt.close();
 				rs.close();
+
 				conexao.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -86,7 +89,7 @@ public class ContaDao implements ContaInterface {
 			conexao = FintechDB.obterconexao();
 			String sql = "UPDATE T_FIN_CONTA SET nr_cpf = ?, nr_agencia = ?, nr_conta = ? WHERE id_conta = ?";
 			stmt = conexao.prepareStatement(sql);
-			stmt.setInt(1, conta.getNr_cpf());
+			stmt.setString(1, conta.getNr_cpf());
 			stmt.setInt(2, conta.getNr_agencia());
 			stmt.setInt(3, conta.getNr_conta());
 			stmt.setInt(4, conta.getId_conta());
@@ -130,23 +133,21 @@ public class ContaDao implements ContaInterface {
 		
 	}
 
-	
-
 	@Override
-	public Conta busConta(int nr_cpf) {
+	public Conta busConta(int id_conta) {
 		Conta conta = null;
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
 
 		try {
 			conexao = FintechDB.obterconexao();
-			stmt = conexao.prepareStatement("SELECT * FROM T_FIN_AGENCIA WHERE nr_cpf = ?");
-			stmt.setInt(1, nr_cpf);
+			stmt = conexao.prepareStatement("SELECT * FROM T_FIN_CONTA WHERE id_conta = ?");
+			stmt.setInt(1, id_conta);
 			rs = stmt.executeQuery();
 
 			if (rs.next()) {
 
-				int id_conta = rs.getInt("id_conta");
+				String nr_cpf = rs.getString("nr_cpf");
 				int nr_agencia = rs.getInt("nr_agencia");
 				int nr_conta = rs.getInt("nr_conta");
 

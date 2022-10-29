@@ -15,7 +15,7 @@ public class InvestimentoDao implements InvestimentoInteface {
     private Connection conexao;
 
     @Override
-    public void cadastrarInvestimento(Investimento investimento) {
+    public void insert(Investimento investimento) {
         
         PreparedStatement stmt = null;
 	
@@ -43,7 +43,7 @@ public class InvestimentoDao implements InvestimentoInteface {
     }
 
     @Override
-    public List<Investimento> listar() {
+    public List<Investimento> getAll() {
         List<Investimento> lista = new ArrayList<Investimento>();
 		PreparedStatement stmt = null;
 		ResultSet rs = null;

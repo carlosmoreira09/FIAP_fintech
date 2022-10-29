@@ -16,7 +16,7 @@ public class LancamentoDao implements LancamentoInterface {
     private Connection conexao;
 
     @Override
-    public void cadastrarLancamento(Lancamento lancamento) {
+    public void insert(Lancamento lancamento) {
         
         PreparedStatement stmt = null;
 	
@@ -42,7 +42,7 @@ public class LancamentoDao implements LancamentoInterface {
     }
 
     @Override
-    public List<Lancamento> listar() {
+    public List<Lancamento> getAll() {
         List<Lancamento> lista = new ArrayList<Lancamento>();
 		PreparedStatement stmt = null;
 		ResultSet rs = null;

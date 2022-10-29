@@ -11,12 +11,11 @@ public class TesteLista {
 
 		CadastroDao dao = new CadastroDao();
 
-		List<Cadastro> lista = dao.listar();
+		List<Cadastro> lista = dao.getAll();
 		for (Cadastro item : lista) {
 
 			System.out.println(
 								"\n---------------------------" +
-								"\nId Conta: " + item.getId_conta() + 
 								"\nNome: " + item.getNm_nome() + 
 								"\nE-mail: " + item.getNm_email() + 
 								"\nCPF: " + item.getNr_cpf() + 
